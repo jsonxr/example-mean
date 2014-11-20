@@ -16,6 +16,16 @@ function sendCustomer(res, customer) {
   res.end(JSON.stringify(customer));
 }
 
+function getCustomerFromDb(id, cb) {
+  setTimeout(function () {
+    if (id < customers.length) {
+      cb(null, customers[id]);
+    } else {
+      cb(new Error("Customer not found"));
+    }
+  }, 3000);
+}
+
 // Simple REST service
 http.createServer(function (req, res) {
   console.log(req.method + ' ' + req.url);
@@ -34,6 +44,15 @@ http.createServer(function (req, res) {
     } else {
       send404(res);
     }
+  } else if (req.url.indexOf('/async/customers/') === 0) {
+    customerId = parseInt(req.url.substr(17));
+    getCustomerFromDb(customerId, function (err, customer) {
+      if (err) {
+        send404(res);
+      } else {
+        sendCustomer(res, customer);
+      }
+    });
   } else {
     send404(res);
   }  
