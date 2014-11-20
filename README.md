@@ -1,11 +1,3 @@
-# Agenda
+# Node server
 
-## Tools
-
-* npm
-* node
-* postman
-
-## Simple http server
-require
-console.log
+Example of how to write a simple http server with built in node modules.
