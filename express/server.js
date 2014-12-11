@@ -21,16 +21,13 @@ app.get('/', function (req, res) {
 
 var auth = require('http-auth');
 var basic = auth.basic(
-  { realm: "pensco"}, 
+  { realm: "pensco"},
   function (username, password, callback) { // Custom authentication method.
-    db.authenticate(username, encrypt(password), function (err, user) {
-      if (user) {
-        callback(true);
-      } else {
-        callback(false);
-      }
-    })
-//    callback(username === "test" && password === "test");
+    if (username === password) {
+      callback(true);
+    } else {
+      callback(false);
+    }
   }
 );
 app.use(auth.connect(basic));
