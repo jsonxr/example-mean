@@ -1,0 +1,13 @@
+  <h1>Customers</h1>
+  <table>
+    <tr><td>first</td><td>last</td></tr>
+    <tr ng-repeat="c in customers">
+      <td>{{c.firstName}}</td>
+      <td>{{c.lastName}}</td>
+      <td>
+        <a href="view/{{c._id}}">view</a> 
+        <a href="" ng-click="delete(c._id)">delete</a>
+      </td>
+    </tr>
+  </table>
+  <a href="new">New</a>
